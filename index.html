@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>С Днём Рождения, Мама!</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .balloons {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .balloon {
+        position: absolute;
+        width: 60px;
+        height: 80px;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .balloon::before {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        width: 2px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateX(-50%);
+      }
+
+      .balloon-1 {
+        background: #ff6b9d;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .balloon-2 {
+        background: #feca57;
+        top: 20%;
+        right: 15%;
+        animation-delay: 1s;
+      }
+
+      .balloon-3 {
+        background: #48dbfb;
+        top: 40%;
+        left: 5%;
+        animation-delay: 2s;
+      }
+
+      .balloon-4 {
+        background: #ff9ff3;
+        top: 60%;
+        right: 10%;
+        animation-delay: 3s;
+      }
+
+      .balloon-5 {
+        background: #54a0ff;
+        top: 80%;
+        left: 20%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0) rotate(-5deg);
+        }
+        50% {
+          transform: translateY(-30px) rotate(5deg);
+        }
+      }
+
+      .confetti {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        animation: confetti-fall linear forwards;
+      }
+
+      @keyframes confetti-fall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 30px;
+        padding: 50px 40px;
+        margin-top: 50px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        animation: slideIn 1s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .title {
+        font-size: 3em;
+        color: #764ba2;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .cat-container {
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .cat-image {
+        width: 100%;
+        max-width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        animation: fadeIn 1.5s ease-in;
+      }
+
+      .cat-image:hover {
+        transform: scale(1.05) rotate(2deg);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .message {
+        margin: 40px 0;
+        font-size: 1.3em;
+        line-height: 180%;
+        color: #333;
+      }
+
+      .message p {
+        margin: 15px 0;
+      }
+
+      .heart {
+        font-size: 2em;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      @keyframes heartbeat {
+        0%, 100% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.2);
+        }
+        50% {
+          transform: scale(1);
+        }
+      }
+
+      .surprise-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 18px 50px;
+        font-size: 1.2em;
+        border-radius: 50px;
+        cursor: pointer;
+        margin: 30px 0;
+        box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        transition: all 0.3s ease;
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+      }
+
+      .surprise-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(118, 75, 162, 0.6);
+      }
+
+      .surprise-btn:active {
+        transform: translateY(-1px);
+      }
+
+      .surprise {
+        margin-top: 30px;
+        animation: slideDown 0.8s ease-out;
+      }
+
+      .surprise.hidden {
+        display: none;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .cat-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .gallery-cat {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .gallery-cat:hover {
+        transform: scale(1.15) rotate(-3deg);
+      }
+
+      .surprise-text {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-top: 25px;
+        animation: rainbow 3s linear infinite;
+      }
+
+      @keyframes rainbow {
+        0% { color: #ff6b9d; }
+        20% { color: #feca57; }
+        40% { color: #48dbfb; }
+        60% { color: #ff9ff3; }
+        80% { color: #54a0ff; }
+        100% { color: #ff6b9d; }
+      }
+
+      .floating-cats {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .floating-cat {
+        position: absolute;
+        font-size: 3em;
+        animation: float-random 8s ease-in-out infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes float-random {
+        0%, 100% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-50px) translateX(30px) rotate(10deg);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer p {
+        color: white;
+        font-size: 1.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+        .title {
+          font-size: 2em;
+        }
+
+        .card {
+          padding: 30px 20px;
+        }
+
+        .message {
+          font-size: 1.1em;
+        }
+
+        .cat-image {
+          height: 300px;
+        }
+
+        .surprise-btn {
+          padding: 15px 35px;
+          font-size: 1em;
+        }
+
+        .cat-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="balloons">
+      <div class="balloon balloon-1"></div>
+      <div class="balloon balloon-2"></div>
+      <div class="balloon balloon-3"></div>
+      <div class="balloon balloon-4"></div>
+      <div class="balloon balloon-5"></div>
+    </div>
+
+    <div class="floating-cats" id="floatingCats"></div>
+    <div class="confetti" id="confetti"></div>
+
+    <div class="container">
+      <div class="card">
+        <h1 class="title">С Днём Рождения, Мама!</h1>
+
+        <div class="cat-container">
+          <img src="c70c7aae-56bf-4639-95a8-532ccc855aa1.jpg" alt="Милый котик" class="cat-image">
+        </div>
+
+        <div class="message">
+          <p>Желаю тебе море счастья, океан любви и бесконечного здоровья!</p>
+          <p>Пусть каждый день приносит только радость и улыбки!</p>
+          <p class="heart">❤️</p>
+        </div>
+
+        <button class="surprise-btn" id="surpriseBtn">Нажми на сюрприз!</button>
+
+        <div class="surprise hidden" id="surprise">
+          <div class="cat-gallery">
+            <img src="ca4b8bc3-b5f4-41f7-a00a-172f2badb18e.jpg" alt="Котик 1" class="gallery-cat">
+            <img src="239b3161-16a5-4b17-baef-cc74d10e641f.jpg" alt="Котик 2" class="gallery-cat">
+            <img src="38e36521-a771-4436-b584-75ce5eb78f83.jpg" alt="Котик 3" class="gallery-cat">
+            <img src="264754fb-0826-4a85-ac9d-e416c3bf68ed.jpg" alt="Котик 4" class="gallery-cat">
+            </div>
+          <p class="surprise-text">Ты лучшая мама на свете! 🌟✨</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>С любовью ❤️</p>
+      </div>
+    </div>
+
+    <script>
+      const surpriseBtn = document.getElementById('surpriseBtn');
+      const surprise = document.getElementById('surprise');
+      const confettiContainer = document.getElementById('confetti');
+      const floatingCatsContainer = document.getElementById('floatingCats');
+
+      const catEmojis = ['🐱', '😸', '😻', '😽', '😼', '😾', '😿', '😹', '😺', '😲', '🐈', '🐈‍⬛'];
+
+      function createConfetti() {
+        const colors = ['#ff6b9d', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#ee5a6f'];
+        const confettiCount = 100;
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti-piece';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          confetti.style.animationDelay = Math.random() * 0.5 + 's';
+          confettiContainer.appendChild(confetti);
+        }
+
+        setTimeout(() => {
+          confettiContainer.innerHTML = '';
+        }, 5000);
+      }
+
+      function createFloatingCat() {
+        const cat = document.createElement('div');
+        cat.className = 'floating-cat';
+        cat.textContent = catEmojis[Math.floor(Math.random() * catEmojis.length)];
+        cat.style.left = Math.random() * 100 + '%';
+        cat.style.top = Math.random() * 100 + '%';
+        cat.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        cat.style.animationDelay = Math.random() * 2 + 's';
+        floatingCatsContainer.appendChild(cat);
+
+        setTimeout(() => {
+          cat.remove();
+        }, 10000);
+      }
+
+      surpriseBtn.addEventListener('click', () => {
+        if (surprise.classList.contains('hidden')) {
+          surprise.classList.remove('hidden');
+          surpriseBtn.textContent = 'Спасибо! ❤️';
+          createConfetti();
+
+          for (let i = 0; i < 15; i++) {
+            setTimeout(() => createFloatingCat(), i * 100);
+          }
+        } else {
+          surprise.classList.add('hidden');
+          surpriseBtn.textContent = 'Нажми на сюрприз!';
+        }
+      });
+
+      createConfetti();
+
+      setInterval(() => {
+        createConfetti();
+      }, 15000);
+
+      setInterval(() => {
+        createFloatingCat();
+      }, 3000);
+
+      const galleryImages = document.querySelectorAll('.gallery-cat');
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          img.style.animation = 'none';
+          setTimeout(() => {
+            img.style.animation = 'fadeIn 0.5s ease';
+          }, 10);
+
+          createConfetti();
+
+          for (let i = 0; i < 8; i++) {
+            setTimeout(() => createFloatingCat(), i * 50);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
